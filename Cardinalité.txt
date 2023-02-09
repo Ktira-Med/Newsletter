@@ -1,0 +1,1 @@
+Dans ce cas, la cardinalité de la relation entre les tables des abonnés et des origines est que pour chaque abonné, il peut y avoir une seule origine possible, mais pour chaque origine, elle peut être affectée à 0 ou plusieurs abonnés.
