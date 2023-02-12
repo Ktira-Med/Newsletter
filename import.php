@@ -2,7 +2,7 @@
 
 
 require 'config.php';
-
+require 'functions.php';
 $filename = $argv[1];
 
 /**
@@ -23,9 +23,12 @@ $file = fopen($filename, "r");
 /**
  * On se connecte à la base de données avec PDO et on prépare la requête d'insertion
  */
-$pdo = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8mb4', DB_USER, DB_PASSWORD);
-$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$pdo = conexion();
+
+// $pdo = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8mb4', DB_USER, DB_PASSWORD);
+// $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+// $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
 
 $pdoStatement = $pdo->prepare('INSERT INTO subscribers (firstname, lastname, email, created_on) VALUES (?,?,?,?)');
 
@@ -52,10 +55,14 @@ while ($row = fgetcsv($file)) {
     $firstname = ucwords(strtolower($firstname), " -");
     $lastname = ucwords(strtolower($lastname), " -");
     $email = strtolower($email);
-    $email = str_replace(" ","",$email);
-    
-    
-    $pdoStatement->execute([$firstname, $lastname, $email, $dateformat]);
+    $email = str_replace(" ", "", $email);
+
+    // Verification de l'existance d'email dans le fichier CSV
+    if (count(existEmail($email)) == 0) {
+        $pdoStatement->execute([$firstname, $lastname, $email, $dateformat]);
+    } else {
+        echo 'email address : ' . $email . ' is already exist! ';
+    }
 }
 
 echo 'Import terminé!';

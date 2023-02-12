@@ -1,6 +1,5 @@
 <?php
 
-
 // Inclusion des dépendances
 require 'config.php';
 require 'functions.php';
@@ -10,19 +9,18 @@ $success = null;
 $email = '';
 $firstname = '';
 $lastname = '';
+$interest = '';
 
 // Si le formulaire a été soumis...
 if (!empty($_POST)) {
-
     // On récupère les données
     $email = trim($_POST['email']);
     $firstname = trim($_POST['firstname']);
     $lastname = trim($_POST['lastname']);
     $firstname = ucwords(strtolower($firstname), " -");
     $lastname = ucwords(strtolower($lastname), " -");
-
-    // On récupère l'origine
     $originSelected = $_POST['origin'];
+
 
     // Validation 
     if (!$email) {
@@ -37,14 +35,30 @@ if (!empty($_POST)) {
         $errors['lastname'] = "Please enter a lastname";
     }
 
+    if (isset($_POST['interestBox']) and verify($_POST['interestBox'])) {
+        $interest = $_POST['interestBox'];
+    } else {
+        $errors['interest'] = "please tick one of the interests";
+    }
+
     // Si tout est OK (pas d'erreur)
     if (empty($errors)) {
 
         // Ajout de l'email dans le fichier csv
-        addSubscriber($email, $firstname, $lastname, $originSelected);
+        $result = addSubscriber($email, $firstname, $lastname, $originSelected, $interest);
 
-        // Message de succès
-        $success  = 'Thank you for your registration';
+        if ($result == true) {
+           
+            $errors['email'] = "email address already exist!";
+            
+        } else {
+            $errors = null;
+            // Message de succès
+            
+            $success  = 'Thank you for your registration';
+        }
+
+        
     }
 }
 
@@ -54,5 +68,6 @@ if (!empty($_POST)) {
 
 // Sélection de la liste des origines et interests
 $origins = getAllOrigins();
+$interests = getAllInterests();
 // Inclusion du template
 include 'index.phtml';
