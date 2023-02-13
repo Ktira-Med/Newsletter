@@ -44,7 +44,7 @@
                     <?php endif; ?>
                 </div>
                 <div class="field-list">
-                    <label for="lastame">lastname</label>
+                    <label for="lastname">lastname</label>
                     <input type="text" name="lastname" id="lastname" value="<?= $lastname ?>">
                     <?php if (isset($errors['lastname'])) : ?>
                         <p class="message error"><?= $errors['lastname']; ?></p>
@@ -63,6 +63,7 @@
                         <input type="checkbox" name="interestBox[]" id="interestBox[]" value="<?= $interest['id']; ?>">
                         <label for="interestBox"><?= $interest['interest_label']; ?></label><br>
                     <?php endforeach; ?>
+
                     <?php if (isset($errors['interest'])) : ?>
                         <p class="message error"><?= $errors['interest']; ?></p>
                     <?php endif; ?>

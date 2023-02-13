@@ -17,6 +17,23 @@ function conexion(){
 }
 
 /**
+ * Récupère tous les emails de la table subscribers
+ */
+function existEmail(string $email)
+{
+    $pdo = conexion();
+
+    $sql = "SELECT id 
+    FROM subscribers 
+    WHERE email='".$email."'";
+        
+ 
+    $query = $pdo->prepare($sql);
+    $query->execute();
+   
+    return $query->fetchAll();
+}
+/**
  * Récupère tous les enregistrements de la table origins
  */
 function getAllOrigins()
@@ -50,24 +67,8 @@ function getAllInterests()
     return $query->fetchAll();
 }
 
-/**
- * Récupère tous les emails de la table subscribers
- */
-function existEmail(string $email)
-{
-    $pdo = conexion();
 
-    $sql = "SELECT id 
-    FROM subscribers 
-    WHERE email='".$email."'";
-        
- 
-    $query = $pdo->prepare($sql);
-    $query->execute();
-   
-    return $query->fetchAll();
-}
-// Verification existance centres d'interets pour le méme subscriber
+// Verification existance centres d'interets pour le même subscriber
 
 function existInterest(int $subscriberId, int $interestId)
 {
@@ -117,19 +118,6 @@ function addSubscriber(string $email, string $firstname, string $lastname, int $
     }else{
        return true;
     }
-
-}
-function addInterest($subscriberId, $interestId){
-
-    $pdo = conexion();
-
-    // Insertion de l'email dans la table subscribers
-    $sql = 'INSERT INTO fill_interest
-            (subscriber_id, interest_id) 
-            VALUES (?,?)';
-
-    $query = $pdo->prepare($sql);
-    $query->execute([$subscriberId, $interestId]);
 }
 
 /**
@@ -144,3 +132,20 @@ function addInterest($subscriberId, $interestId){
 
     return $interestTick;
 }
+
+/**
+ * ajoute des interests dans la table fill_interest
+ */
+function addInterest($subscriberId, $interestId){
+
+    $pdo = conexion();
+
+    // Insertion des interests dans la table fill_interest
+    $sql = 'INSERT INTO fill_interest
+            (subscriber_id, interest_id) 
+            VALUES (?,?)';
+
+    $query = $pdo->prepare($sql);
+    $query->execute([$subscriberId, $interestId]);
+}
+

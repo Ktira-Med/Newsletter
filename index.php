@@ -53,8 +53,8 @@ if (!empty($_POST)) {
             
         } else {
             $errors = null;
-            // Message de succès
             
+            // Message de succès
             $success  = 'Thank you for your registration';
         }
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : jeu. 09 fév. 2023 à 13:44
+-- Généré le : lun. 13 fév. 2023 à 10:00
 -- Version du serveur : 8.0.30
 -- Version de PHP : 8.1.10
 
@@ -153,7 +153,7 @@ ALTER TABLE `origins`
 -- AUTO_INCREMENT pour la table `subscribers`
 --
 ALTER TABLE `subscribers`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
 
 --
 -- Contraintes pour les tables déchargées
