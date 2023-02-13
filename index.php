@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 
 // Inclusion des dépendances
 require 'config.php';
@@ -10,6 +12,7 @@ $email = '';
 $firstname = '';
 $lastname = '';
 $interest = '';
+
 
 // Si le formulaire a été soumis...
 if (!empty($_POST)) {
@@ -48,17 +51,15 @@ if (!empty($_POST)) {
         $result = addSubscriber($email, $firstname, $lastname, $originSelected, $interest);
 
         if ($result == true) {
-           
+
             $errors['email'] = "email address already exist!";
-            
         } else {
             $errors = null;
 
             // Message de succès
             $success  = 'Thank you for your registration';
+       
         }
-
-        
     }
 }
 
