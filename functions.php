@@ -1,6 +1,6 @@
 <?php
 
-function conexion(){
+function connexion(){
    // Construction du Data Source Name
    $dsn = 'mysql:dbname=' . DB_NAME . ';host=' . DB_HOST;
 
@@ -21,7 +21,7 @@ function conexion(){
  */
 function existEmail(string $email)
 {
-    $pdo = conexion();
+    $pdo = connexion();
 
     $sql = "SELECT id 
     FROM subscribers 
@@ -38,7 +38,7 @@ function existEmail(string $email)
  */
 function getAllOrigins()
 {
-    $pdo = conexion();
+    $pdo = connexion();
 
     $sql = 'SELECT *
             FROM origins
@@ -55,7 +55,7 @@ function getAllOrigins()
  */
 function getAllInterests()
 {
-    $pdo = conexion();
+    $pdo = connexion();
 
     $sql = 'SELECT *
             FROM interests
@@ -72,7 +72,7 @@ function getAllInterests()
 
 function existInterest(int $subscriberId, int $interestId)
 {
-    $pdo = conexion();
+    $pdo = connexion();
 
     $sql = "SELECT *
     FROM fill_interest 
@@ -90,7 +90,7 @@ function existInterest(int $subscriberId, int $interestId)
  */
 function addSubscriber(string $email, string $firstname, string $lastname, int $originId, $interests)
 {
-    $pdo = conexion();
+    $pdo = connexion();
 
     // Insertion de l'email dans la table subscribers
     $sql = 'INSERT INTO subscribers
@@ -120,25 +120,13 @@ function addSubscriber(string $email, string $firstname, string $lastname, int $
     }
 }
 
-/**
- * Verification de cochage sur la liste des interets
- */
- function verify($interest){
-
-    $interestTick=false;
-    if(count($interest)>=1){
-        $interestTick=true;
-    }
-
-    return $interestTick;
-}
 
 /**
  * ajoute des interests dans la table fill_interest
  */
 function addInterest($subscriberId, $interestId){
 
-    $pdo = conexion();
+    $pdo = connexion();
 
     // Insertion des interests dans la table fill_interest
     $sql = 'INSERT INTO fill_interest

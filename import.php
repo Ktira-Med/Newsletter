@@ -23,7 +23,7 @@ $file = fopen($filename, "r");
 /**
  * On se connecte à la base de données avec PDO et on prépare la requête d'insertion
  */
-$pdo = conexion();
+$pdo = connexion();
 
 // $pdo = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8mb4', DB_USER, DB_PASSWORD);
 // $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);

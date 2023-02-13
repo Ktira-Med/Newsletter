@@ -35,7 +35,7 @@ if (!empty($_POST)) {
         $errors['lastname'] = "Please enter a lastname";
     }
 
-    if (isset($_POST['interestBox']) and verify($_POST['interestBox'])) {
+    if (isset($_POST['interestBox'])) {
         $interest = $_POST['interestBox'];
     } else {
         $errors['interest'] = "please tick one of the interests";
@@ -53,7 +53,7 @@ if (!empty($_POST)) {
             
         } else {
             $errors = null;
-            
+
             // Message de succès
             $success  = 'Thank you for your registration';
         }
