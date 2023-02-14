@@ -24,9 +24,10 @@
     <main class="project">
         <form id="subscribe-form" action="index.php" method="POST">
 
-            <?php if (isset($success)) : ?>
-                <p class="message success"><?= $success; ?></p>
-            <?php endif; ?>
+            <?php if (isset($_SESSION['message'])) : ?>
+                <p class="message success"><?= $_SESSION['message']; ?></p>
+            <?php unset($_SESSION['message']);
+         endif; ?>
             <fieldset>
                 <legend>Sign up to the newsletter !</legend>
                 <div class="field-list">

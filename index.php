@@ -58,6 +58,13 @@ if (!empty($_POST)) {
 
             // Message de succès
             $success  = 'Thank you for your registration';
+
+            //La variable session pour le message de success
+            $_SESSION['message']=$success;
+
+            //Redirection vers la page index.php
+            header('Location:index.php');
+            exit();
        
         }
     }
