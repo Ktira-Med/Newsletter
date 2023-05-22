@@ -2,7 +2,7 @@
 session_start();
 require './vendor/autoload.php';
 require './config.php';
-// require 'functions.php';
+//require 'functions.php';
 
 use App\Model\InterestModel;
 use App\Model\SubscriberModel;
